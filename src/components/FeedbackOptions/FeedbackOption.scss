@@ -7,21 +7,21 @@
   line-height: 1.3;
 }
 
-.success {
+.good {
   background-color: #4caf50;
   &:hover {
     background-color: #46a049;
   }
 }
 
-.warning {
+.neutral {
   background-color: #ff9800;
   &:hover {
     background: #e68a00;
   }
 }
 
-.danger {
+.bad {
   background-color: #f44336;
   &:hover {
     background: #da190b;

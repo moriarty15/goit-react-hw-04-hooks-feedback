@@ -13,6 +13,22 @@ function App() {
   const [total, setTotal] = useState(0);
   const [positivePercentage, setPositivePercentage] = useState(0);
 
+  const onLeaveFeedback = (name) => {
+    switch (name) {
+      case 'good':
+        setGood(good + 1)
+        break;
+      case 'neutral':
+        setNeutral(neutral + 1)
+        break;
+      case 'bad':
+        setBad(bad + 1)
+        break;
+      
+      default: return;
+    }
+  }
+
   useEffect(() => {
     setTotal(good + neutral + bad);
   }, [good, neutral, bad]);
@@ -26,12 +42,8 @@ function App() {
       <h1>Please leave feedback</h1>
       <Section>
         <FeedbackOptions
-          setGood={setGood}
-          good={good}
-          setNeutral={setNeutral}
-          neutral={neutral}
-          setBad={setBad}
-          bad={bad}
+          options={['good', 'neutral', 'bad']}
+          onLeaveFeedback={onLeaveFeedback}
         />
       </Section>
       {total === 0 ? (
