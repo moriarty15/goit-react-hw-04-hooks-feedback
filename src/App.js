@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Statistics from "./components/Statistics";
 import FeedbackOptions from "./components/FeedbackOptions";
 import Notification from "./components/Notification";
@@ -10,8 +10,7 @@ function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [positivePercentage, setPositivePercentage] = useState(0);
+
 
   const onLeaveFeedback = (name) => {
     switch (name) {
@@ -29,14 +28,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    setTotal(good + neutral + bad);
-  }, [good, neutral, bad]);
-
-  useEffect(() => {
-    setPositivePercentage(Math.round((good * 100) / total));
-  }, [total, good]);
-
   return (
     <div className="App">
       <h1>Please leave feedback</h1>
@@ -46,7 +37,7 @@ function App() {
           onLeaveFeedback={onLeaveFeedback}
         />
       </Section>
-      {total === 0 ? (
+      {good+neutral+bad === 0 ? (
         <Section>
           <Notification/>
         </Section>
@@ -56,8 +47,8 @@ function App() {
             good={good}
             neutral={neutral}
             bad={bad}
-            total={total}
-            positivePercentage={positivePercentage}
+            total={good+neutral+bad}
+            positivePercentage={(Math.round((good * 100) / (good+neutral+bad)))}
           />
         </Section>
       )}
